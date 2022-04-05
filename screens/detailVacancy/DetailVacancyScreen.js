@@ -104,6 +104,7 @@ export default function DetailVacancyScreen({ route, navigation }) {
   const source = {
     html: description
   };
+
   const work = getTypeWork(typeWork);
   const contract = getTypeSite(typeSite);
   const activeButton = status == 'ACTIVE' && statusVacancy;

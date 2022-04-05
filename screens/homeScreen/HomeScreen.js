@@ -87,10 +87,6 @@ export default function HomeScreen({ navigation }) {
         return (
           <>
             <TouchableHighlight underlayColor='#591C1C50' style={styles.icon_header}
-              onPress={() => navigation.navigate('SettingsScreen')}>
-              <FontAwesomeIcon icon={faCogs} color="#55bb4e" size={20} />
-            </TouchableHighlight>
-            <TouchableHighlight underlayColor='#591C1C50' style={styles.icon_header}
               onPress={() => setLogoutModalVisible(true)}>
               <FontAwesomeIcon icon={faSignOutAlt} color="#55bb4e" size={20} />
             </TouchableHighlight>

@@ -4,15 +4,14 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import RenderHtml from 'react-native-render-html';
-
-import ViewLoading from '../../views/viewLoading/ViewLoading.js';
+import moment from 'moment';
 
 import styles from '../../assets/styles/mainStyles.js';
 
-export default function DetailVacancyScreen({ route, navigation }) {
+export default function MessageScreen({ route, navigation }) {
 
-  const { data, navigation, } = props;
-  const { date, message } = data;
+  const { data } = route.params;
+  const { completeMessage, date } = data;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -23,13 +22,10 @@ export default function DetailVacancyScreen({ route, navigation }) {
     });
   }, [navigation]);
 
-  if (loading) {
-    return (<ViewLoading />);
-  }
-
+  const setDate = () => moment(date).format('DD MMMM YYYY');
   const { width } = useWindowDimensions();
   const source = {
-    html: message
+    html: completeMessage
   };
 
   return (
@@ -37,14 +33,13 @@ export default function DetailVacancyScreen({ route, navigation }) {
       source={require('../../assets/images/blob-scene-haikei.png')}
       style={styles.bck_img}
     >
-      {_renderModalConfirm(modalVisible, _confirmAction, setModalVisible)}
       <View style={styles.container}>
         <View style={styles.flexPointOne} />
         <View style={styles.flexPointNine}>
           <View style={styles.card_step}>
             <View style={styles.flexPointTwo}>
-              <Text style={[styles.h3, styles.text_center, styles.font_weight,]}>
-                Fecha:
+              <Text style={[styles.h6, styles.text_center, styles.font_weight,]}>
+                Fecha: {setDate()}
               </Text>
             </View>
             <View style={styles.flexPointNine}>

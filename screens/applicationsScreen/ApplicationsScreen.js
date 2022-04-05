@@ -11,7 +11,7 @@ import styles from './styles.js';
 export default function ApplicationsScreen({ route, navigation }) {
 
   const [ loading, setLoading ] = useState(false);
-  const [ nominations, setNominationss ] = useState([]);
+  const [ nominations, setNominations ] = useState([]);
 
   const apiFetcher = new ApiFetcher();
   const secureAppStorage = new SecureAppStorage();
@@ -28,18 +28,10 @@ export default function ApplicationsScreen({ route, navigation }) {
   async function _loadData() {
     setLoading(true);
 
-    let nominationsData = [];
-
     try {
       const tempUser = await secureAppStorage.getUser();
-      const dataVacancies = await apiFetcher.getVacancies();
       const dataNominations = await apiFetcher.getNominations(tempUser._id);
-      nominationsData = dataNominations.map(nomination => {
-        const vacancyData = dataVacancies.find(vacancy => vacancy._id == nomination.vacancy);
-        nomination.nameVacancy = vacancyData.name;
-        return nomination;
-      })
-      setNominationss(nominationsData);
+      setNominations(dataNominations);
     } catch(error) {
       console.log(error);
     }

@@ -11,7 +11,7 @@ export default class ApiFetcher {
   }
 
   getBaseUrl() {
-    return 'http://298a-2806-106e-23-a1ef-fd27-68c4-d6a3-9e5b.ngrok.io/api/v1/';
+    return 'http://d7cd-2806-106e-23-b558-65e9-feac-7b89-6d0d.ngrok.io/api/v1/';
   }
 
   getUserId() {
@@ -108,7 +108,7 @@ export default class ApiFetcher {
 
   async getVacancies() {
     const endpoint = 'getVacancies';
-    const baseUrl = await this.getBaseUrl();
+    const baseUrl = this.getBaseUrl();
     const url = `${baseUrl}${endpoint}`;
     return await this._get(url);
   }

@@ -6,9 +6,10 @@ import moment from 'moment';
 
 import styles from './styles';
 
-export default function CardVacancy(props) {
+export default function CardMessage(props) {
+
   const { data, navigation, } = props;
-  const { date, message } = data;
+  const { date, labelMessage} = data;
 
   const setDate = () => moment(date).format('DD MMMM YYYY');
 
@@ -19,7 +20,7 @@ export default function CardVacancy(props) {
     >
       <View style={[styles.flexOne, styles.row_card, styles.row_description]}>
         <FontAwesomeIcon
-          icon={faCalendar} 
+          icon={faCalendar}
           size={15}
           color="#55bb4e"
         />
@@ -29,7 +30,7 @@ export default function CardVacancy(props) {
         style={[styles.h5, styles.font_weight, styles.text_green_dark, ]}
         numberOfLines={1}
       >
-        {message}
+        {labelMessage}
       </Text>
     </TouchableOpacity>
   );

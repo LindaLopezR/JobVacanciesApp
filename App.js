@@ -8,6 +8,7 @@ import VacanciesScreen from './screens/vacanciesScreen/VacanciesScreen';
 import ApplicationsScreen from './screens/applicationsScreen/ApplicationsScreen';
 import DetailVacancyScreen from './screens/detailVacancy/DetailVacancyScreen';
 import DetailNominationScreen from './screens/detailNomination/DetailNominationScreen';
+import MessageScreen from './screens/messageScreen/MessageScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ function App() {
         <Stack.Screen name="VacancyDetail" component={DetailVacancyScreen} options={{headerShadowVisible: false}} />
         <Stack.Screen name="Applications" component={ApplicationsScreen} options={{headerShadowVisible: false}} />
         <Stack.Screen name="NominationDetail" component={DetailNominationScreen} options={{headerShadowVisible: false}} />
+        <Stack.Screen name="MessageDetail" component={MessageScreen} options={{headerShadowVisible: false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

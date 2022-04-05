@@ -29,7 +29,7 @@ export default function LoginScreen({ navigation }) {
 
   const apiFetcher = new ApiFetcher();
   const secureAppStorage = new SecureAppStorage();
-  const version = 'Versión v1.1.2 ';
+  const version = 'Versión v1.0.0 ';
 
   const checkIfUpdate = async function() {
     try {

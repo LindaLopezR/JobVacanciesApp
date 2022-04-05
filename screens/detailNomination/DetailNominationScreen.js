@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   ImageBackground, ScrollView, Text, View, Image 
 } from 'react-native';
@@ -7,16 +7,14 @@ import { faEnvelopeOpenText, } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 
 import { colorLineStatus, textStatus } from '../../views/form/utilities.js';
-import ViewLoading from '../../views/viewLoading/ViewLoading.js';
 
 import styles from '../../assets/styles/mainStyles.js';
+import CardMessage from '../../views/cards/CardMessage.js';
 
 export default function DetailNominationScreen({ route, navigation }) {
 
   const { data } = route.params;
-  const { date, status, nameVacancy, messages } = data;
-
-  const [ loading, setLoading ] = useState(false);
+  const { date, historyMss, status, vacancyName } = data;
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -26,10 +24,6 @@ export default function DetailNominationScreen({ route, navigation }) {
       headerStyle: { backgroundColor: 'transparent'},
     });
   }, [navigation]);
-
-  if (loading) {
-    return (<ViewLoading />);
-  }
 
   const setStatus = () => {
     const color = colorLineStatus(status);
@@ -43,7 +37,7 @@ export default function DetailNominationScreen({ route, navigation }) {
   const setDate = () => moment(date).format('DD MMMM YYYY');
 
   const renderData = () => {
-    return messages.map((message, i) => (
+    return historyMss.map((message, i) => (
       <View key={i} style={styles.content_vacancy}>
         <CardMessage
           data={message}
@@ -51,7 +45,7 @@ export default function DetailNominationScreen({ route, navigation }) {
         />
       </View>
     ));
-  }
+  };
 
   return (
     <ImageBackground
@@ -66,7 +60,7 @@ export default function DetailNominationScreen({ route, navigation }) {
               <View style={[styles.flexOne, styles.row_card, styles.row_description]}>
                 <View style={styles.flexPointSix}>
                   <Text style={[styles.h3, styles.font_weight,]}>
-                    {nameVacancy}
+                    {vacancyName}
                   </Text>
                 </View>
                 <View style={styles.flexPointSix}>
@@ -88,7 +82,7 @@ export default function DetailNominationScreen({ route, navigation }) {
                   <Text style={[styles.description, styles.font_weight]}>Mensajes</Text>
                 </View>
                 <View style={styles.flexPointNine}>
-                  {messages && messages.length 
+                  {historyMss && historyMss.length 
                     ? (
                       <ScrollView>
                         {renderData()}
