@@ -9,7 +9,7 @@ import ViewLoading from '../../views/viewLoading/ViewLoading';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { 
-  faBriefcase, faCogs, faNewspaper, faSignOutAlt,
+  faBriefcase, faNewspaper, faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './styles.js';
@@ -80,7 +80,6 @@ export default function HomeScreen({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: '',
-      headerTintColor: '#FFF',
       headerTransparent: true,
       headerStyle: { backgroundColor: 'transparent'},
       headerRight: () => {   
@@ -88,7 +87,7 @@ export default function HomeScreen({ navigation }) {
           <>
             <TouchableHighlight underlayColor='#591C1C50' style={styles.icon_header}
               onPress={() => setLogoutModalVisible(true)}>
-              <FontAwesomeIcon icon={faSignOutAlt} color="#55bb4e" size={20} />
+              <FontAwesomeIcon icon={faSignOutAlt} color="#348a2f" size={20} />
             </TouchableHighlight>
           </>
         )
@@ -125,7 +124,7 @@ export default function HomeScreen({ navigation }) {
       {_renderModalLogout(logoutModalVisible, _logoutApp, setLogoutModalVisible)}
       <View style={styles.flexOne}>
       <ImageBackground
-        source={require('../../assets/images/blob-scene-haikei.png')}
+        source={require('../../assets/images/general_scene.png')}
         style={styles.bck_img}
       >
         <View style={styles.flexPointOne}/>
@@ -148,10 +147,10 @@ export default function HomeScreen({ navigation }) {
                   <FontAwesomeIcon
                     icon={faNewspaper} 
                     size={40}
-                    color="#348a2f"
+                    color="#0b8011"
                   />
                 </View>
-                <Text style={[styles.h5, styles.text_marine]}>
+                <Text style={[styles.h5, styles.text_marine, styles.font_weight, styles.mt_2]}>
                   Vacantes
                 </Text>
               </View>
@@ -165,10 +164,10 @@ export default function HomeScreen({ navigation }) {
                   <FontAwesomeIcon
                     icon={faBriefcase} 
                     size={40}
-                    color="#348a2f"
+                    color="#0b8011"
                   />
                 </View>
-                <Text style={[styles.h5, styles.text_marine]}>
+                <Text style={[styles.h5, styles.text_marine, styles.font_weight, styles.mt_2]}>
                   Mis postulaciones
                 </Text>
               </View>

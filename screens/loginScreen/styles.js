@@ -3,13 +3,11 @@ import mainStyles from '../../assets/styles/mainStyles.js';
 
 let localStyles = {
   logo:{
-    width: 270,
-    height: 270,
+    width: 252,
+    height: 65,
     marginBottom: 40
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#fff',
     borderStyle: 'solid',
     borderRadius: 25,
     width: '70%',
@@ -18,10 +16,11 @@ let localStyles = {
     justifyContent: 'center',
     padding: 10,
     paddingLeft: 25,
-    color: '#fff',
+    backgroundColor: '#e6f3e5',
+    color: '#356233',
   },
   version:{
-    color: '#f2f2f2'
+    color: '#356233'
   },
   btn_login:{
     width: '70%',
@@ -36,6 +35,10 @@ let localStyles = {
   text_btn:{
     color: '#fff',
     fontSize: 16
+  },
+  title:{
+    fontSize: 25,
+    fontWeight: 'bold'
   }
 };
 

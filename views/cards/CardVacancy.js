@@ -26,7 +26,7 @@ export default function CardVacancy(props) {
           <FontAwesomeIcon
             icon={faFileSignature} 
             size={15}
-            color="#55bb4e"
+            color="#6a6a6a"
           />
           <Text style={styles.description}>{work}</Text>
         </View>
@@ -34,7 +34,7 @@ export default function CardVacancy(props) {
           <FontAwesomeIcon
             icon={faBriefcase} 
             size={15}
-            color="#55bb4e"
+            color="#6a6a6a"
           />
           <Text style={styles.description}>{contract}</Text>
         </View>

@@ -30,13 +30,13 @@ export default function MessageScreen({ route, navigation }) {
 
   return (
     <ImageBackground
-      source={require('../../assets/images/blob-scene-haikei.png')}
+      source={require('../../assets/images/general_scene.png')}
       style={styles.bck_img}
     >
       <View style={styles.container}>
         <View style={styles.flexPointOne} />
         <View style={styles.flexPointNine}>
-          <View style={styles.card_step}>
+          <View style={styles.content_white}>
             <View style={styles.flexPointTwo}>
               <Text style={[styles.h6, styles.text_center, styles.font_weight,]}>
                 Fecha: {setDate()}

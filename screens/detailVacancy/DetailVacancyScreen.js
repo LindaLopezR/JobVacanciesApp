@@ -116,7 +116,7 @@ export default function DetailVacancyScreen({ route, navigation }) {
 
   return (
     <ImageBackground
-      source={require('../../assets/images/blob-scene-haikei.png')}
+      source={require('../../assets/images/general_scene.png')}
       style={styles.bck_img}
     >
       {_renderModalConfirm(modalVisible, confirmAction, setModalVisible)}

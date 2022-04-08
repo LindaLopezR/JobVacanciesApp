@@ -160,7 +160,7 @@ const mainStyles = {
     color: '#C9252C'
   },
   text_marine:{
-    color: '#042940'
+    color: '#407c3d'
   },
   text_blue:{
     color: '#1760bf'
@@ -187,9 +187,17 @@ const mainStyles = {
   card_step:{
     flex: 1,
     height: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#e6f3e5',
     borderRadius: 10,
-    padding: 10
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   card_final:{
     flex: 1,
@@ -209,10 +217,6 @@ const mainStyles = {
   },
   card_item_content:{
     padding: 10
-  },
-
-  containerVacancy: {
-    backgroundColor: '#e4f6e2',
   },
 
   // COMPONENTS
@@ -238,6 +242,8 @@ const mainStyles = {
     borderRadius: 10,
     padding: 5,
     paddingLeft: 20,
+    backgroundColor: '#f5f9f4',
+    color: '#356233',
   },
   inputSearchOther: {
     borderColor: '#ccc',
@@ -434,13 +440,23 @@ const mainStyles = {
   line_white:{
     borderColor: 'white',
   },
+  line_bottom:{
+    borderBottomColor: '#c9c9c9',
+    borderBottomWidth: 1,
+  },
 
   // MARGIN / PADDING
   pl_3:{
     paddingLeft: 10,
   },
+  mt_2:{
+    marginTop: 5,
+  },
   mt_3:{
     marginTop: 10,
+  },
+  mb_2:{
+    marginBottom: 5,
   },
   mb_3:{
     marginBottom: 10,
@@ -468,7 +484,32 @@ const mainStyles = {
     paddingTop: 10,
     paddingBottom: 10,
     paddingHorizontal: 15,
+  },
+
+  content_white: {
+    flex: 1,
+    height: '100%',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  content_history: {
+    borderBottomColor: '#c9c9c9',
+    borderBottomWidth: 1,
+    marginBottom: 10,
+    paddingBottom: 10,
+    paddingTop: 5
   }
+
 };
 
 export default mainStyles;

@@ -5,7 +5,7 @@ let localStyles = {
 
   item: {
     borderColor: '#00568C',
-    backgroundColor: '#e4f6e2',
+    backgroundColor: '#fff',
     paddingTop: 55,
     paddingBottom: 55,
     margin: 15,
@@ -27,7 +27,7 @@ let localStyles = {
     padding: 5,
     width: 70,
     height: 70,
-    backgroundColor: '#FFF'
+    backgroundColor: '#C7E3C5'
   }
 }
 

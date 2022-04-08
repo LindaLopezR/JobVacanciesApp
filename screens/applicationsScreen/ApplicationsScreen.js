@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
+import moment from 'moment';
 
 import ApiFetcher from '../../modules/ApiFetcher.js';
 import SecureAppStorage from '../../modules/SecureAppStorage.js';
@@ -42,8 +43,10 @@ export default function ApplicationsScreen({ route, navigation }) {
     _loadData();
   }, []);
 
-  const renderData = () => {
-    return nominations.map((nomination, i) => (
+  const setDate = (date) => moment(date).format('DD MMMM YYYY');
+
+  const renderNomination = (data) => {
+    return data.map((nomination, i) => (
       <View key={i} style={styles.content_vacancy}>
         <CardNomination
           data={nomination}
@@ -57,16 +60,51 @@ export default function ApplicationsScreen({ route, navigation }) {
     return (<ViewLoading />);
   }
 
+  let tableData = [];
+
+  if (nominations && nominations.length) {
+    nominations.sort((a ,b ) => b.date - a.date);
+    nominations.map(item => {
+      const date = new Date(item.date);
+      item.dateString = moment(date).format('YYYY-MM-DD');
+    })
+  
+    const groupBy = (data, prop) => {
+      return data.reduce((groups, item) => {
+        var val = item[prop];
+        groups[val] 
+          ? groups[val]['nominations'].push(item) 
+          : groups[val] = { time:val, nominations: [item] };
+        return groups;
+      }, {});
+    }
+    
+    tableData = groupBy(nominations,'dateString');
+  }
+
+  const renderData = () => {
+    return Object.entries(tableData).map(([key, value], i) => (
+      <View key={i} style={styles.content_history}>
+        <Text style={[styles.h6, styles.font_weight, styles.mb_2, styles.text_gray]}>
+          {setDate(key)}
+        </Text>
+        <View>
+          {renderNomination(value.nominations)}
+        </View>
+      </View>
+    ));
+  }
+
   return (
     <ImageBackground
-      source={require('../../assets/images/blob-scene-haikei.png')}
+      source={require('../../assets/images/general_scene.png')}
       style={styles.bck_img}
     >
       <View style={styles.container}>
         <View style={styles.flexPointOne} />
         <View style={styles.flexPointNine}>
-          <View style={styles.card_step}>
-            {nominations && nominations.length 
+          <View style={styles.content_white}>
+            {tableData && Object.keys(tableData)
               ? (
                 <ScrollView>
                   {renderData()}

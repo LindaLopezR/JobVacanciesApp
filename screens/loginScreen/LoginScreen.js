@@ -113,49 +113,38 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <KeyboardAwareScrollView
-      contentContainerStyle={{flexGrow: 1, backgroundColor: '#1760bf'}}
+      contentContainerStyle={{flexGrow: 1, backgroundColor: '#c7e3c5'}}
       enableOnAndroid={true}
     >
-      {/* <ImageBackground
-        source={require('../../assets/images/login.png')}
+      <ImageBackground
+        source={require('../../assets/images/login_scene.png')}
         style={styles.bck_img}
-      > */}
+      >
         <View style={styles.flexOne}>
-          <View style={styles.flexPointSix}>
-            
+          <View style={[styles.flexPointSeven, styles.column]}>
             <View style={styles.content_center}>
-              {/* <Image
-                style={styles.logo}
-                source={require('../../assets/images/medallalogin.png')}
-              /> */}
+            <Image
+              style={styles.logo}
+              source={require('../../assets/images/Merit-Logo-Red-2013-Tag-centered-1.png')}
+            />
+            <Text style={styles.title}>SomosReconocimientos</Text>
             </View>
           </View>
 
-          <Text style={{
-            flex: 1,
-            color: '#FFF',
-            fontSize: 25,
-            justifyContent: 'center',
-            textAlign: 'center',
-            fontWeight: "bold"
-          }}>SomosReconocimientos</Text>
-
-          <View style={[styles.flexPointTwo, styles.column]}>
+          <View style={[styles.flexPointThree, styles.column]}>
             <View style={styles.content_center}>
               <TextInput
                 style={styles.input}
-                placeholder={'Usuario'}
-                placeholderTextColor="#f2f2f2"
-                underlineColorAndroid='transparent'
+                placeholder='Usuario'
+                placeholderTextColor="#407c3d"
                 multiline={false}
                 onChangeText={text => updateData('username', text)}
                 value={data.username}
               />
               <TextInput
                 style={styles.input}
-                placeholder={'Contraseña'}
-                placeholderTextColor="#f2f2f2"
-                underlineColorAndroid='transparent'
+                placeholder='Contraseña'
+                placeholderTextColor="#407c3d"
                 multiline={false}
                 secureTextEntry
                 onChangeText={text => updateData('password', text)}
@@ -174,7 +163,7 @@ export default function LoginScreen({ navigation }) {
           </View>   
 
         </View>
-      {/* </ImageBackground> */}
+      </ImageBackground>
     </KeyboardAwareScrollView>
   );
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, Image, ImageBackground, ScrollView, Text, View } from 'react-native';
 import ApiFetcher from '../../modules/ApiFetcher.js';
-import SecureAppStorage from '../../modules/SecureAppStorage.js';
+
+import InputSearch from '../../views/form/InputSearch.js';
 import CardVacancy from '../../views/cards/CardVacancy.js';
 import ViewLoading from '../../views/viewLoading/ViewLoading.js';
 
@@ -10,6 +11,8 @@ import styles from './styles.js';
 export default function VacanciesScreen({ route, navigation }) {
 
   const [ loading, setLoading ] = useState(false);
+  const [ search, setSearch ] = useState('');
+  const [ data, setData ] = useState([]);
   const [ vacancies, setVacancies ] = useState([]);
 
   const apiFetcher = new ApiFetcher();
@@ -33,6 +36,7 @@ export default function VacanciesScreen({ route, navigation }) {
       // Mostrar solo vacantes activas
       vacanciesData = dataVacancies.filter(vacancy => vacancy.status == 'ACTIVE');
       setVacancies(vacanciesData);
+      setData(vacanciesData);
     } catch(error) {
       setTimeout(() => { Alert.alert('Error', error) }, 100);
     }
@@ -42,6 +46,15 @@ export default function VacanciesScreen({ route, navigation }) {
   useEffect(() => {
     _loadData();
   }, []);
+
+  const handleSearch = text => {
+    let results = data;
+    if (text) {
+      const textSearch = text.trim().toLowerCase();
+      results = vacancies.filter(item => item.name.toLowerCase().includes(textSearch));
+    }
+    setVacancies(results);
+  };
 
   const renderData = () => {
     return vacancies.map((vacancy, i) => (
@@ -60,18 +73,29 @@ export default function VacanciesScreen({ route, navigation }) {
 
   return (
     <ImageBackground
-      source={require('../../assets/images/blob-scene-haikei.png')}
+      source={require('../../assets/images/general_scene.png')}
       style={styles.bck_img}
     >
       <View style={styles.container}>
         <View style={styles.flexPointOne} />
         <View style={styles.flexPointNine}>
-          <View style={[styles.card_step, styles.containerVacancy]}>
+          <View style={styles.card_step}>
             {vacancies && vacancies.length 
               ? (
-                <ScrollView>
-                  {renderData()}
-                </ScrollView>
+                <View style={styles.flexOne}>
+                  <View style={styles.flexPointOne}>
+                    <InputSearch
+                      search={search}
+                      setSearch={(e) => {
+                        setSearch(e);
+                        handleSearch(e)
+                      }}
+                    />
+                  </View>
+                  <ScrollView style={styles.flexPointEight}>
+                    {renderData()}
+                  </ScrollView>
+                </View>
               )
               : (
                 <View style={styles.content_center}>

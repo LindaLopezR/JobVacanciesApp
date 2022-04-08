@@ -4,7 +4,7 @@ import mainStyles from '../../assets/styles/mainStyles.js';
 let localStyles = {
 
   card_vacancy: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f8f8',
     margin: 5,
     shadowColor: "#000",
     shadowOffset: {
@@ -20,6 +20,12 @@ let localStyles = {
 
   row_description: {
     marginTop: 10
+  },
+
+  row_mess: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
 };
 
