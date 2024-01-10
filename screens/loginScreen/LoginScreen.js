@@ -116,7 +116,7 @@ export default function LoginScreen({ navigation }) {
         source={require('../../assets/images/login_scene.png')}
         style={styles.bck_img}
       >
-        <View style={styles.flexOne}>
+        <View style={[styles.flexOne, { padding: 20}]}>
           <View style={[styles.flexPointSeven, styles.column]}>
             <View style={styles.content_center}>
               <Text style={styles.title}>Jobs</Text>
