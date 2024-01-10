@@ -1,6 +1,35 @@
 import SecureAppStorage from './SecureAppStorage.js';
-import { Platform } from 'react-native';
 import axios from 'axios';
+
+const users = [{_id: Date.now(), username: '123456', password: 'Password1', name: 'Paulina Sanchez', picture: null}];
+const vacancies = [
+  {
+    _id: 'GPZkfgQqDEWw3YT3d',
+    name: 'Coordinador de Diseño Gráfico / TAF',
+    description: '<p><a href="https://www.linkedin.com/jobs/view/3000766050/?" rel="noopener noreferrer" target="_blank">https://www.linkedin.com/jobs/view/3000766050/?</a>alternateChannel=search&amp;refId=%2Bu2tBSt3GCFdgQkemzB40A%3D%3D&amp;trackingId=JSJMfJJvBe%2BqxwJIKclyvw%3D%3D</p><p>Grupo Axo®&nbsp;desde 1994 es&nbsp;la referencia obligada, un aliado poderoso para sus socios y el recurso más certero para las firmas que confían en nosotros.</p><p>El futuro, aunque incierto para todos, nos encanta. Porque de algo estamos seguros: estaremos ahí: “Acercando a las mejores marcas con las personas a quienes apasionan, de formas que aún nadie ha imaginado. #ProudToBeAxo</p>',
+    typeWork: '2',
+    typeSite: '2',
+    id: '0124',
+    enable: true,
+    user: 'kBGeA8jMqEnZsSDFr',
+    date: 1698690437871,
+    status: 'ACTIVE',
+    history: []
+  },
+  {
+    _id: 'JMWEo7jrAxz8YXAvP',
+    name: 'Productor Audio Visual - Prácticas Profesionales y de práctica',
+    description: '<p>Hermont´s World&nbsp;somo una Empresa de Servicios Logísticos, Agencia Aduanal y Asesor en Comercio Exterior,</p><p><br></p><p>Si estas estudiando y quieres poner en practicas tus conocimientos y sobre todo generar experiencia laborar, te estamos buscando.</p><p><br></p><p>Actividades:</p><ul><li>Publicidad.</li><li>Desarrollo y Edición de contenido Audio Visual para redes sociales.</li><li>Apoyo al área de mercadotecnia Digital.</li></ul><p><br></p>',
+    typeWork: '4',
+    typeSite: '1',
+    id: '045',
+    enable: true,
+    user: 'kBGeA8jMqEnZsSDFr',
+    date: 1698690437905,
+    status: 'ACTIVE',
+    history: []
+  }
+]
 
 export default class ApiFetcher {
 
@@ -10,15 +39,10 @@ export default class ApiFetcher {
     this.company = null;
   }
 
-  getBaseUrl() {
-    return 'http://d7cd-2806-106e-23-b558-65e9-feac-7b89-6d0d.ngrok.io/api/v1/';
-  }
-
   getUserId() {
     return new Promise((resolve, reject) => {
 
       if (this.userId !== null) {
-        //console.log('Return user id from cache');
         resolve(this.userId);
       }
 
@@ -36,18 +60,15 @@ export default class ApiFetcher {
   }
 
   async _get(url) {
-    console.log('Get => ', url);
     const response = await axios.get(url, {
       timeout : 5000
     })
 
     if (response.status == 200) {
-      console.log(typeof(response.data))
       return response.data;
       
     } else {
       const error = 'Status code error';
-      console.log(error)
       throw error;
     }
   }
@@ -81,50 +102,29 @@ export default class ApiFetcher {
   }
 
   async login(username, password) {
-    const endpoint = 'login';
-    const baseUrl = this.getBaseUrl();
-    let pushToken = '';
-    try {
-      pushToken = await this.secureAppStorage.getPushToken();
-      console.log('Token => ', pushToken);
-    } catch(error) {
-      console.log('Push Token Error => ', error);
+    let response = {success: true, message: 'Login success'};
+    let user = users.find(user => user.username == username);
+
+    if (!user) {
+      response.success = false;
+      response.message = 'Este usuario no existe';
+      return response;
     }
 
-    const url = `${baseUrl}${endpoint}`;
-    console.log('Url => ', url);
+    let validPassword = user.password == password;
 
-    let data = {
-      username : username,
-      password : password,
-      pushToken : pushToken,
-      os : Platform.OS,
-      version : 'rewards',
-      product : 'merit'
-    };
+    if (!validPassword) {
+      response.success = false;
+      response.message = 'Contraseña incorrecta';
+      return response;
+    }
 
-    return await this._post(url, data);
+    response.user = user;
+    return response;
   }
 
   async getVacancies() {
-    const endpoint = 'getVacancies';
-    const baseUrl = this.getBaseUrl();
-    const url = `${baseUrl}${endpoint}`;
-    return await this._get(url);
-  }
-
-  async completeVacancy(data) {
-    const endpoint = 'completeVacancy';
-    const baseUrl = this.getBaseUrl();
-    const url = `${baseUrl}${endpoint}`;
-    return await this._post(url, data);
-  }
-
-  async getNominations(data) {
-    const endpoint = 'getNominationsByUser';
-    const baseUrl = this.getBaseUrl();
-    const url = `${baseUrl}${endpoint}/${data}`;
-    return await this._get(url);
+    return vacancies;
   }
 
 }

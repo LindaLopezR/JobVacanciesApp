@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBriefcase, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getTypeSite, getTypeWork } from '../form/utilities';
 
 import styles from './styles';
@@ -23,16 +22,16 @@ export default function CardVacancy(props) {
       </Text>
       <View style={[styles.flexOne, styles.row_card, styles.row_description]}>
         <View style={[styles.flexPointSix, styles.row_card]}>
-          <FontAwesomeIcon
-            icon={faFileSignature} 
+          <MaterialCommunityIcons
+            name='file-sign'
             size={15}
             color="#6a6a6a"
           />
           <Text style={styles.description}>{work}</Text>
         </View>
         <View style={[styles.flexPointSix, styles.row_card]}>
-          <FontAwesomeIcon
-            icon={faBriefcase} 
+          <MaterialCommunityIcons
+            name='briefcase'
             size={15}
             color="#6a6a6a"
           />

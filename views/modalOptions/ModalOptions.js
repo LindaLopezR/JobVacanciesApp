@@ -8,7 +8,7 @@ export default function ModalOptions(props) {
     <Modal
       animationType='slide'
       transparent={true}
-      onRequestClose={() => {console.log("Modal has been closed.")}}
+      onRequestClose={() => {}}
     >
         <View style={styles.content_center}>
           <View style={styles.modalContent}>

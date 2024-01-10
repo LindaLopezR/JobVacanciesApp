@@ -2,14 +2,12 @@ import React from 'react';
 import { 
   ImageBackground, ScrollView, Text, View, Image 
 } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faComments, faEnvelopeOpenText, } from '@fortawesome/free-solid-svg-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import moment from 'moment';
-
-import { colorLineStatus, textStatus } from '../../views/form/utilities.js';
 
 import styles from '../../assets/styles/mainStyles.js';
 import CardMessage from '../../views/cards/CardMessage.js';
+import { colorLineStatus, textStatus } from '../../views/form/utilities.js';
 
 export default function DetailNominationScreen({ route, navigation }) {
 
@@ -93,33 +91,33 @@ export default function DetailNominationScreen({ route, navigation }) {
           <View style={styles.content_white}>
             <View style={[styles.flexPointTwo,]}>
               <View style={styles.content_center}>
-                <Text style={[styles.h3, styles.font_weight, styles.text_center]}>
+                <Text style={[styles.h5, styles.font_weight, styles.text_center]}>
                   {vacancyName}
                 </Text>
                 <Text style={[styles.description, styles.text_center]}>
                   Fecha de postulación: {setDate()}
                 </Text>
-                {/* {setStatus()} */}
+                {setStatus()}
               </View>
             </View>
             <View style={styles.flexPointNine}>
               <View style={styles.flexOne}>
                 <View style={[styles.flexPointOne, styles.row_card]}>
-                  <FontAwesomeIcon
-                    icon={faComments} 
+                  <MaterialCommunityIcons
+                    name='comment'
                     size={15}
                     color="#55bb4e"
                   />
                   <Text style={[styles.description, styles.font_weight]}>Mensajes</Text>
                 </View>
                 <View style={styles.flexPointNine}>
-                  {tableData && Object.keys(tableData)
+                  {/* {tableData && Object.keys(tableData)
                     ? (
                       <ScrollView>
                         {renderData()}
                       </ScrollView>
                     )
-                    : (
+                    : ( */}
                       <View style={styles.content_center}>
                         <View style={styles.contentImg}>
                           <Image
@@ -131,7 +129,7 @@ export default function DetailNominationScreen({ route, navigation }) {
                           Sin mensajes
                         </Text>
                       </View>
-                    )}
+                    {/* )} */}
                 </View>
               </View>
             </View>

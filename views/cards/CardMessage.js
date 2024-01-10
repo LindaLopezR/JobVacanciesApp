@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faComments, } from '@fortawesome/free-solid-svg-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import styles from './styles';
 
@@ -17,8 +16,8 @@ export default function CardMessage(props) {
     >
       <View style={[styles.flexOne, styles.row_card]}>
         <View style={styles.flexPointOne}>
-          <FontAwesomeIcon
-            icon={faComments}
+          <MaterialCommunityIcons
+            name='comment'
             size={15}
             color="#0b8011"
           />

@@ -32,9 +32,9 @@ export default function VacanciesScreen({ route, navigation }) {
     let vacanciesData = [];
 
     try {
-      const dataVacancies = await apiFetcher.getVacancies();
+      const dataVacancies = await apiFetcher.getVacancies() || [];
       // Mostrar solo vacantes activas
-      vacanciesData = dataVacancies.filter(vacancy => vacancy.status == 'ACTIVE');
+      vacanciesData = dataVacancies;
       setVacancies(vacanciesData);
       setData(vacanciesData);
     } catch(error) {

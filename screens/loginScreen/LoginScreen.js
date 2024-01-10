@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ImageBackground, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { ImageBackground, Text, TextInput, View, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import * as Updates from 'expo-updates';
 
 import ApiFetcher from '../../modules/ApiFetcher.js';
@@ -11,12 +10,10 @@ import ViewLoading from '../../views/viewLoading/ViewLoading';
 import styles from './styles.js';
 
 const goToScreen = function(navigation, screen) {
-  console.log('Go to => ', screen);
   navigation.navigate(screen);
 }
 
 const replaceScreen = function(navigation, screen, params) {
-  console.log('Go to => ', screen);
   navigation.replace(screen, params);
 }
 
@@ -79,7 +76,6 @@ export default function LoginScreen({ navigation }) {
     try {
       let response = await apiFetcher.login(username, password);
       if (response.success) {
-        console.log('=> ', response.user);
         await secureAppStorage.saveUser(response.user);
         replaceScreen(navigation, 'Home');
       } else {
@@ -112,9 +108,9 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={{flexGrow: 1, backgroundColor: '#c7e3c5'}}
-      enableOnAndroid={true}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flexGrow: 1, backgroundColor: '#c7e3c5'}}
     >
       <ImageBackground
         source={require('../../assets/images/login_scene.png')}
@@ -123,11 +119,7 @@ export default function LoginScreen({ navigation }) {
         <View style={styles.flexOne}>
           <View style={[styles.flexPointSeven, styles.column]}>
             <View style={styles.content_center}>
-            <Image
-              style={styles.logo}
-              source={require('../../assets/images/Merit-Logo-Red-2013-Tag-centered-1.png')}
-            />
-            <Text style={styles.title}>SomosReconocimientos</Text>
+              <Text style={styles.title}>Jobs</Text>
             </View>
           </View>
 
@@ -160,10 +152,9 @@ export default function LoginScreen({ navigation }) {
 
               <Text style={styles.version}>{version}</Text>
             </View>
-          </View>   
-
+          </View>
         </View>
       </ImageBackground>
-    </KeyboardAwareScrollView>
+    </KeyboardAvoidingView>
   );
 }

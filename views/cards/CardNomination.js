@@ -1,10 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCalendar, faComments, } from '@fortawesome/free-solid-svg-icons';
-import moment from 'moment';
-
-import { colorLineStatus, textStatus, } from '../form/utilities';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import styles from './styles';
 
@@ -21,12 +17,12 @@ export default function CardNomination(props) {
         {vacancyName}
       </Text>
       <View style={[styles.flexOne, styles.row_card, styles.row_description, styles.row_mess]}>
-        <FontAwesomeIcon
-          icon={faComments} 
+        <MaterialCommunityIcons
+          name='comment'
           size={15}
           color="#0b8011"
         />
-        <Text style={styles.description}>{data.historyMss.length}</Text>
+        <Text style={styles.description}>{data.historyMss&&data.historyMss.length}</Text>
       </View>
     </TouchableOpacity>
   );

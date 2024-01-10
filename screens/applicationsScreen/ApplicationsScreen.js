@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
 import moment from 'moment';
 
-import ApiFetcher from '../../modules/ApiFetcher.js';
-import SecureAppStorage from '../../modules/SecureAppStorage.js';
+import AppAsyncStorage from '../../modules/AppAsyncStorage.js';
 import CardNomination from '../../views/cards/CardNomination.js';
 import ViewLoading from '../../views/viewLoading/ViewLoading.js';
 
@@ -14,8 +13,7 @@ export default function ApplicationsScreen({ route, navigation }) {
   const [ loading, setLoading ] = useState(false);
   const [ nominations, setNominations ] = useState([]);
 
-  const apiFetcher = new ApiFetcher();
-  const secureAppStorage = new SecureAppStorage();
+  const appAsyncStorage = new AppAsyncStorage();
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -30,8 +28,7 @@ export default function ApplicationsScreen({ route, navigation }) {
     setLoading(true);
 
     try {
-      const tempUser = await secureAppStorage.getUser();
-      const dataNominations = await apiFetcher.getNominations(tempUser._id);
+      const dataNominations = await appAsyncStorage.getAllHistories();
       setNominations(dataNominations);
     } catch(error) {
       console.log(error);
@@ -104,7 +101,7 @@ export default function ApplicationsScreen({ route, navigation }) {
         <View style={styles.flexPointOne} />
         <View style={styles.flexPointNine}>
           <View style={styles.content_white}>
-            {tableData && Object.keys(tableData)
+            {tableData && Object.keys(tableData).length
               ? (
                 <ScrollView>
                   {renderData()}

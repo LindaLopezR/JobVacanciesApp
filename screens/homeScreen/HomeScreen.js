@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, ImageBackground, Text, TouchableHighlight, View, } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native'
 import * as Updates from 'expo-updates';
 ;
 import SecureAppStorage from '../../modules/SecureAppStorage';
+import AppAsyncStorage from '../../modules/AppAsyncStorage.js';
 import ModalOptions from '../../views/modalOptions/ModalOptions.js';
 import ViewLoading from '../../views/viewLoading/ViewLoading';
-
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { 
-  faBriefcase, faNewspaper, faSignOutAlt,
-} from '@fortawesome/free-solid-svg-icons';
 
 import styles from './styles.js';
 
 const goToScreen = function(navigation, screen, params) {
-  console.log('Go to => ', screen);
   navigation.navigate(screen, params);
 };
 
 const replaceScreen = function(navigation, screen, params) {
-  console.log('Go to => ', screen);
   navigation.replace(screen, params);
 }
 
@@ -51,6 +46,7 @@ export default function HomeScreen({ navigation }) {
   const [ logoutModalVisible, setLogoutModalVisible ] = useState(false);
   const [ username, setUsername ] = useState('--');
 
+  const appAsyncStorage = new AppAsyncStorage();
   const secureAppStorage = new SecureAppStorage();
 
   const checkIfUpdate = async function() {
@@ -68,8 +64,7 @@ export default function HomeScreen({ navigation }) {
     React.useCallback(() => {
       async function getUserData () {
         const user = await secureAppStorage.getUser();
-        console.log('User card => ', user)
-        let nameUser = user.profile.name.split(' ').slice(0,3).join(' ');
+        let nameUser = user.name.split(' ').slice(0,3).join(' ');
         setUsername(nameUser);
       };
   
@@ -87,7 +82,7 @@ export default function HomeScreen({ navigation }) {
           <>
             <TouchableHighlight underlayColor='#591C1C50' style={styles.icon_header}
               onPress={() => setLogoutModalVisible(true)}>
-              <FontAwesomeIcon icon={faSignOutAlt} color="#348a2f" size={20} />
+              <MaterialCommunityIcons name='login' size={20} color="#348a2f" />
             </TouchableHighlight>
           </>
         )
@@ -104,6 +99,7 @@ export default function HomeScreen({ navigation }) {
     
     try {
       await secureAppStorage.deleteUser();
+      await appAsyncStorage.deleteAllData();
 
       setTimeout(() => {
         replaceScreen(navigation, 'Login');
@@ -139,13 +135,13 @@ export default function HomeScreen({ navigation }) {
         <View style={[styles.flexPointEight]}>
           <View style={[styles.flexOne, styles.column, { justifyContent: 'space-evenly'}]}>
             <TouchableHighlight
-              underlayColor='#f8f1e750'
+              underlayColor='#f8f1e7'
               onPress={() => goToScreen(navigation, 'Vacancies')}
             >
               <View style={styles.item}>
                 <View style={styles.icon_menu}>
-                  <FontAwesomeIcon
-                    icon={faNewspaper} 
+                  <MaterialCommunityIcons
+                    name='newspaper-variant-multiple'
                     size={40}
                     color="#0b8011"
                   />
@@ -156,13 +152,13 @@ export default function HomeScreen({ navigation }) {
               </View>
             </TouchableHighlight>
             <TouchableHighlight
-              underlayColor='#f8f1e750'
+              underlayColor='#f8f1e7'
               onPress={() => goToScreen(navigation, 'Applications')}
             >
               <View style={styles.item}>
                 <View style={styles.icon_menu}>
-                  <FontAwesomeIcon
-                    icon={faBriefcase} 
+                  <MaterialCommunityIcons
+                    name='briefcase'
                     size={40}
                     color="#0b8011"
                   />

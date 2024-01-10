@@ -1,7 +1,6 @@
 import React from 'react';
 import { TextInput, View } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import styles from './styles.js';
 
@@ -20,9 +19,9 @@ export default function InputSearch(props = {}) {
         />
       </View>
       <View style={styles.contentIcon}>
-        <FontAwesomeIcon
+        <MaterialCommunityIcons
           style={styles.iconSearch}
-          icon={faSearch}
+          name='card-search-outline'
         />
       </View>
     </View>

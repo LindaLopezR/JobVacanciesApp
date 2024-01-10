@@ -15,7 +15,6 @@ class SecureAppStorage {
   _getJSONItem(key) {
     return new Promise((resolve, reject) => {
       SecureStore.getItemAsync(key).then((response) => {
-        console.log('response from JsonItem',response);
         resolve(JSON.parse(response));
       }).catch((error) => {
         reject(error);
@@ -38,7 +37,6 @@ class SecureAppStorage {
   saveUser(user) {
     user.picture = encodeURI(user.picture);
     let userString = JSON.stringify(user);
-    console.log('saveUser',userString)
     return SecureStore.setItemAsync(USER, userString);
   }
 

@@ -4,11 +4,10 @@ import {
   useWindowDimensions, TouchableOpacity 
 } from 'react-native';
 import RenderHtml from 'react-native-render-html';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBriefcase, faFileSignature } from '@fortawesome/free-solid-svg-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getTypeSite, getTypeWork } from '../../views/form/utilities';
 
-import ApiFetcher from '../../modules/ApiFetcher.js';
+import AppAsyncStorage from '../../modules/AppAsyncStorage.js';
 import SecureAppStorage from '../../modules/SecureAppStorage.js';
 import ModalOptions from '../../views/modalOptions/ModalOptions';
 import ViewLoading from '../../views/viewLoading/ViewLoading.js';
@@ -43,10 +42,10 @@ export default function DetailVacancyScreen({ route, navigation }) {
 
   const [ modalVisible, setModalVisible ] = useState(false);
   const [ user, setUser ] = useState(null);
-  const [ statusVacancy, setStatusVacancy ] = useState(false);
+  const [ statusVacancy, setStatusVacancy ] = useState(null);
   const [ loading, setLoading ] = useState(false);
 
-  const apiFetcher = new ApiFetcher();
+  const appAsyncStorage = new AppAsyncStorage();
   const secureAppStorage = new SecureAppStorage();
 
   React.useLayoutEffect(() => {
@@ -60,12 +59,13 @@ export default function DetailVacancyScreen({ route, navigation }) {
 
   async function _loadData() {
     setLoading(true);
+    let temp = null;
     try {
       const tempUser = await secureAppStorage.getUser();
-      const nomination = await apiFetcher.getNominations(tempUser._id);
-      const isApliqued = nomination.find(item => item.vacancy == _id);
+      const nomination = await await appAsyncStorage.getAllHistories();
+      temp = nomination.find(item => item.vacancy == _id);
 
-      setStatusVacancy(isApliqued);
+      // setStatusVacancy(temp !== null);
       setUser(tempUser);
     } catch(error) {
       console.log(error);
@@ -84,12 +84,16 @@ export default function DetailVacancyScreen({ route, navigation }) {
     const dataToSend = {
       candidate: user._id,
       vacancy: _id,
+      vacancyName: name,
+      status: 'PENDIENT',
+      date: Date.now(),
+      enable: true,
     };
 
     setLoading(true);
     
     try {
-      await apiFetcher.completeVacancy(dataToSend);
+      await appAsyncStorage.insertOnlyNewHistories(dataToSend);
       setLoading(false);
       Alert.alert('¡Gracias por aplicar!', 'Te deseamos mucho éxito en esta postulación, te estaremos notificando en que proceso te encuentras.');
       navigation.navigate('Home'); 
@@ -124,46 +128,39 @@ export default function DetailVacancyScreen({ route, navigation }) {
         <View style={styles.flexPointOne} />
         <View style={styles.flexPointNine}>
           <View style={styles.card_step}>
-            <View style={styles.flexPointNine}>
+            <View style={styles.flexOne}>
+              <Text style={[styles.h5, styles.text_center, styles.font_weight,]}>
+                {name}
+              </Text>
               <View style={styles.flexOne}>
-                <View style={styles.flexPointTwo}>
-                  <Text style={[styles.h3, styles.text_center, styles.font_weight,]}>
-                    {name}
-                  </Text>
-                </View>
-                <View style={styles.flexPointNine}>
-                  <ScrollView>
-                    <RenderHtml
-                      contentWidth={width}
-                      source={source}
+                <ScrollView>
+                  <RenderHtml
+                    contentWidth={width}
+                    source={source}
+                  />
+                </ScrollView>
+              </View>
+              <View style={styles.flexPointOne}>
+                <View style={[styles.flexOne, styles.row_card, styles.row_description]}>
+                  <View style={[styles.flexPointSix, styles.row_card]}>
+                    <MaterialCommunityIcons
+                      name='file-sign'
+                      size={15}
+                      color="#55bb4e"
                     />
-                  </ScrollView>
-                </View>
-                <View style={styles.flexPointOne}>
-                  <View style={[styles.flexOne, styles.row_card, styles.row_description]}>
-                    <View style={[styles.flexPointSix, styles.row_card]}>
-                      <FontAwesomeIcon
-                        icon={faFileSignature} 
-                        size={15}
-                        color="#55bb4e"
-                      />
-                      <Text style={styles.description}>{work}</Text>
-                    </View>
-                    <View style={[styles.flexPointSix, styles.row_card]}>
-                      <FontAwesomeIcon
-                        icon={faBriefcase} 
-                        size={15}
-                        color="#55bb4e"
-                      />
-                      <Text style={styles.description}>{contract}</Text>
-                    </View>
+                    <Text style={styles.description}>{work}</Text>
+                  </View>
+                  <View style={[styles.flexPointSix, styles.row_card]}>
+                    <MaterialCommunityIcons
+                      name='briefcase'
+                      size={15}
+                      color="#55bb4e"
+                    />
+                    <Text style={styles.description}>{contract}</Text>
                   </View>
                 </View>
               </View>
-            </View>
-
-            <View style={styles.flexPointOne}>
-              <View style={[styles.flexOne, activatedButton]}>
+              <View style={[ activatedButton]}>
                 <TouchableOpacity
                   onPress={() => setModalVisible(true)}
                   style={[styles.btn, styles.btn_info, styles.btn_view_cart,]}
