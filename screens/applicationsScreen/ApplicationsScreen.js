@@ -14,7 +14,7 @@ export default function ApplicationsScreen({ route, navigation }) {
   const [ nominations, setNominations ] = useState([]);
 
   const appAsyncStorage = new AppAsyncStorage();
-  // 
+
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
