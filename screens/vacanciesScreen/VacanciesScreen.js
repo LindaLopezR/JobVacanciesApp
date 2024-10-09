@@ -16,7 +16,7 @@ export default function VacanciesScreen({ route, navigation }) {
   const [ vacancies, setVacancies ] = useState([]);
 
   const apiFetcher = new ApiFetcher();
-
+// 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Vacantes',
