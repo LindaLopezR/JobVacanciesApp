@@ -11,6 +11,7 @@ import DetailNominationScreen from './screens/detailNomination/DetailNominationS
 import MessageScreen from './screens/messageScreen/MessageScreen';
 
 const Stack = createNativeStackNavigator();
+// 
 
 function App() {
   return (
