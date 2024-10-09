@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "JobVacanciesApp",
-    "slug": "JobVacanciesApp",
+    "name": "JobVacanciesAppGeneral",
+    "slug": "JobVacanciesAppGeneral",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
