@@ -18,7 +18,7 @@ const _renderModalConfirm = function(logoutModalVisible, actionCallback = () => 
   if (!logoutModalVisible) {
     return null;
   }
-  
+  // 
   return (
     <ModalOptions
       message="¿Desea postular a esta vacante?"
