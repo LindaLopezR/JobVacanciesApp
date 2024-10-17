@@ -2,6 +2,7 @@ import SecureAppStorage from './SecureAppStorage.js';
 import axios from 'axios';
 
 const users = [{_id: Date.now(), username: '123456', password: 'Password1', name: 'Paulina Sanchez', picture: null}];
+
 const vacancies = [
   {
     _id: 'GPZkfgQqDEWw3YT3d',
